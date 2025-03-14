@@ -1,0 +1,157 @@
+/* File: assets/css/style.css
+ */
+
+/* CSS Import rules need to be at the top. */
+@import url("theme.css");         /* Colors */
+@import url("global.css");        /* Stuff that applies to everyone */
+/* @import url("queries.css");    /* Stuff for media queries and RWD */
+/* TODO: Probably should put my media quieres in a file to keep things in order. */
+@import url("header.css");        /* Stuff that goes in the header */
+/* @import url("navbar.css");     /* Stuff that goes in the nav */
+/* @import url("main.css");       /* Stuff that goes in the main */
+@import url("footer.css");        /* Stuff that goes in the footer */
+/* @import url("gallery.css");    /* Stuff for displaying photos or projects */
+
+/* This is the code that it this project came with.
+ * TODO: Even if it would cost me point, replace this ugly crap with what I used in the previous homework.
+ */
+
+.card {
+  background-color: hsl(0, 0%, 100%);
+  border-radius: 5px;
+  border-width: 1px;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px 0px;
+  color: hsl(206, 17%, 28%);
+  font-size: 18px;
+  margin: 0 auto;
+  max-width: 800px;
+  padding: 30px 40px;
+}
+
+.card-body {
+  min-height: 100px;
+  height: 100vh; 
+}
+
+.card-footer {
+  text-align: center;
+}
+
+/* TODO: Define these later */
+/*
+.control {}
+.control > label {}
+.control > input[type="range"] {}
+.control > input[type="number"] {}
+.control > input[type="checkbox"] {}
+*/
+
+#len_msg {
+  font-size: 10pt;
+  font-weight: bold;
+  color: red;
+}
+
+fieldset {
+  border-radius: 5px;
+}
+
+fieldset > legend {
+  font-weight: bold;
+}
+
+fieldset > dl > dt {
+  font-weight: normal;
+}
+
+fieldset > dl > dd {
+  font-size: smaller;
+}
+
+input[type="radio"] {
+  cursor: pointer;
+}
+
+input[type="radio"] + label {
+  cursor: pointer;
+}
+
+input[type="range"] {
+  cursor: pointer;
+}
+
+input[type="range"]:disabled {
+  cursor:not-allowed;
+}
+
+/* TODO: Can we change the cursor on the selectors of an input[type="number"]? */
+input[type="number"] {
+  cursor: default;
+}
+
+input[type="number"]:disabled {
+  cursor: not-allowed;
+}
+
+
+input[type="checkbox"] {
+  cursor: pointer;
+}
+
+input[type="checkbox"] + label {
+  cursor: pointer;
+}
+
+#generate {
+  cursor: pointer;
+}
+
+#password {
+  width: 100%; 
+  height: 100px;
+  font-size: 3rem;
+  text-align: center;
+  font-weight: bold;
+  
+  /* font-size: 32pt; /* Make it big! */
+}
+
+#copy {
+  font-weight: bold;
+  border: 3px solid black;
+  cursor: pointer;
+}
+
+/* TODO: Move this to queries.css */
+/* This is why we don't use rem */
+/* TODO: Fix font sizes later */
+@media (max-width: 690px) {
+  .btn {
+    /*font-size: 1rem;
+    margin: 16px 0px 0px 0px;
+    padding: 10px 15px;
+    */
+  }
+
+  #password {
+    /*
+    font-size: 2rem;
+    */
+    /* font-size: 32pt; /* Make it big! */
+  }
+}
+
+@media (max-width: 500px) {
+  .btn {
+    /*
+    font-size: 0.8rem;
+    */
+  }
+
+  #password {
+    /*
+    font-size: 2rem;
+    */
+    /* font-size: 32pt; /* Make it big! */
+  }
+}

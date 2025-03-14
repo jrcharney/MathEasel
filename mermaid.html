@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mermaid Editor</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/showdown/dist/showdown.min.js"></script>
+    <style>
+        body {
+            display: flex;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        textarea {
+            width: 50%;
+            padding: 10px;
+            border: none;
+            resize: none;
+            font-size: 16px;
+        }
+        #preview {
+            width: 50%;
+            padding: 10px;
+            border-left: 1px solid #ccc;
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+    <textarea id="editor" placeholder="Enter Mermaid code...">graph TD;
+    A[Start] --> B{Decision};
+    B -->|Yes| C[Do something];
+    B -->|No| D[Do something else];
+    C --> E[End];
+    D --> E;
+    </textarea>
+    <div id="preview"></div>
+
+    <script>
+        mermaid.initialize({ startOnLoad: false });
+
+        const editor = document.getElementById("editor");
+        const preview = document.getElementById("preview");
+        
+        function renderMermaid() {
+            const code = editor.value;
+            if (code.trim() === "") {
+                preview.innerHTML = "";
+                return;
+            }
+            
+            const container = document.createElement("div");
+            container.className = "mermaid";
+            container.textContent = code;
+            preview.innerHTML = "";
+            preview.appendChild(container);
+            
+            mermaid.init(undefined, container);
+        }
+        
+        editor.addEventListener("input", renderMermaid);
+        
+        renderMermaid(); // Initial render
+    </script>
+</body>
+</html>

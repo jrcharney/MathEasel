@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Math Easel</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$']],
+                processEscapes: true,
+                processEnvironments: true,
+                tags: 'ams'
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
+    <style>
+        .math-easel { 
+            display: flex; 
+            height: 100vh; 
+            margin: 0;
+            padding: 1rem; 
+            font-family: sans-serif; 
+        }
+        #editor {       /* textarea */ 
+            width: 50%; 
+            padding: 10px; 
+            border: inset; 
+            font-size: 12pt; 
+        }
+        #preview {              /* div */
+            width: 50%; 
+            padding: 10px; 
+            overflow: auto; 
+            border: 1px solid #ddd; 
+        }
+    </style>
+</head>
+<body>
+    <div class="ribbon">
+        <span><a href="https://github.com/jrcharney/MathEasel">Fork on Github</a></span>
+    </div>
+    <!-- class="wrapper" -->
+    <header id="top">
+        <!-- We need an ID here so that we can jump back up to the top -->
+        <img src="assets/images/my_killer_robot.jpg" alt="pfp" width="100" height="100">
+        <h1>Math Easel</h1>
+    </header>
+    <main>
+        <section class="card">
+            <details>
+                <summary>LaTeX Tips</summary>
+                
+                <blockquote>TODO: Add a list of common LaTeX tips here.</blockquote>
+
+            </details>
+        </section>
+        <section class="card">
+            <div class="card-header">
+                <input type="file">
+                <button>Load</button>
+                <button>Save</button>
+                <button>Save Image</button>                
+            </div>
+            
+            <div class="card-body math-easel">
+                <textarea 
+                    id="editor" 
+                    placeholder="Write Markdown with LaTeX ($E=mc^2$) here..."
+                    aria-placeholder="Write Markdown with LaTeX ($E=mc^2$) here..."
+                    rows="25"
+                    cols="20"
+                    >
+$$
+\begin{aligned}
+    a &= b + c \\
+    d &= e - f
+\end{aligned}
+$$</textarea>
+                <hr>
+                <div id="preview"></div><!-- TODO: Canvas? -->
+            </div>
+        </section>
+    </main>
+    <footer>
+        <section>
+            <section>
+                <h3>Links</h3>
+                <ul>
+                    <li><a href="https://jrcharney.github.io/">Home</a></li>
+                    <li><a href="https://github.com/jrcharney/">Github</a></li>
+                    <li><a href="https://codepen.io/jrcharney/">CodePen</a></li>
+                    <li><a href="https://dev.to/jrcharney/">Dev.to</a></li>
+                </ul>
+            </section>
+            <!-- TODO: veritcal hr -->
+            <section></section>
+        </section>
+        <section>
+            <p>&copy; 2022 | A JRCharney Production | <img src="assets/images/US-United-States-Flag-icon.png" alt="US Flag" width="16px" height="16px"> Coded in America</p>
+        </section>
+    </footer>
+    <script src="assets/js/script.js"></script>
+    
+
+    <script>
+        /* For now, let's just get the LaTeX/MathJax part working. */
+        const editor = document.getElementById("editor");
+        const preview = document.getElementById("preview");
+        const converter = new showdown.Converter({ tables: true });
+        
+        function escapeLaTeXBlocks(markdown) {
+            return markdown.replace(/\$\$(.*?)\$\$/gs, (match) => {
+                return match.replace(/\\/g, "\\\\");
+            });
+        }
+                
+        function updatePreview() {
+            let markdown = editor.value;
+            markdown = escapeLaTeXBlocks(markdown);
+            let html = converter.makeHtml(markdown);
+            preview.innerHTML = html;
+            
+            if (window.MathJax && MathJax.typeset) {
+                MathJax.typeset();
+            }
+            
+        }
+
+        editor.addEventListener("input", updatePreview);
+        updatePreview();
+    </script>
+</body>
+</html>
